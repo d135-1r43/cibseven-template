@@ -5,7 +5,8 @@
   <version>0.0.1-SNAPSHOT</version>
 
   <properties>
-    <cibseven.version>2.2.0-SNAPSHOT</cibseven.version>
+    <cibseven.version.enterprise>2.1.4-ee</cibseven.version.enterprise>
+    <cibseven.version.extension>2.1.0</cibseven.version.extension>
     <spring-boot.version>3.5.6</spring-boot.version>
     <maven.compiler.release>17</maven.compiler.release>
   </properties>
@@ -26,22 +27,22 @@
     <dependency>
       <groupId>org.cibseven.bpm.springboot</groupId>
       <artifactId>cibseven-bpm-spring-boot-starter-webapp</artifactId>
-      <version>${cibseven.version}</version>
+      <version>${cibseven.version.enterprise}</version>
     </dependency>
     <dependency>
       <groupId>org.cibseven.bpm.springboot</groupId>
       <artifactId>cibseven-bpm-spring-boot-starter-rest</artifactId>
-      <version>${cibseven.version}</version>
+      <version>${cibseven.version.enterprise}</version>
     </dependency>    
     <dependency>
       <groupId>org.cibseven.bpm.springboot</groupId>
       <artifactId>cibseven-bpm-spring-boot-starter-security</artifactId>
-      <version>${cibseven.version}</version>
+      <version>${cibseven.version.enterprise}</version>
     </dependency>
     <dependency>
       <groupId>org.cibseven.bpm.extension</groupId>
       <artifactId>cibseven-keycloak</artifactId>
-      <version>${cibseven.version}</version>
+      <version>${cibseven.version.extension}</version>
     </dependency>
     <dependency>
       <groupId>com.h2database</groupId>
