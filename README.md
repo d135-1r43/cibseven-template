@@ -42,21 +42,33 @@ Falls noch keine `settings.xml` vorhanden ist, muss die Datei neu angelegt werde
 <activeProfile>cibseven-ee</activeProfile>
 ```
 
-## Anwendungskonfiguration
+## Starten
 
-In `src/main/resources/application.yaml` müssen folgende Platzhalter durch die tatsächlichen Werte ersetzt werden:
+### 1. Keycloak starten
 
-- `<url>` — Hostname des Keycloak-Servers (mehrfach vorhanden)
-- `<secret>` — Client-Secret der Keycloak-Registrierung `cib-seven-local`
-
-## Bauen und Starten
+Keycloak wird über Docker Compose gestartet und ist vorkonfiguriert (Realm, Client, Benutzer werden automatisch importiert):
 
 ```bash
-# Bauen
-mvn clean package -DskipTests
+docker compose up -d
+```
 
-# Starten
+Keycloak ist anschließend unter `http://localhost:8180` erreichbar.
+Admin-Zugang: `admin` / `admin`
+
+### 2. Anwendung bauen und starten
+
+```bash
+mvn clean package -DskipTests
 mvn spring-boot:run
 ```
 
-Die Anwendung ist anschließend unter `http://localhost:8080` erreichbar. Die Engine-REST-API ist unter `/engine-rest` verfügbar.
+Die Anwendung ist unter `http://localhost:8080` erreichbar.
+
+### Einloggen
+
+Nach dem Öffnen von `http://localhost:8080` wird automatisch zu Keycloak weitergeleitet. Login mit:
+
+- **Benutzername:** `demo`
+- **Passwort:** `demo`
+
+Der Benutzer `demo` ist Mitglied der Gruppe `camunda-admin` und hat vollen Zugriff auf die Anwendung.
