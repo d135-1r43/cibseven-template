@@ -82,9 +82,9 @@
 
   <repositories>
     <repository>
-      <id>mvn-cibseven-enterprise-snapshots</id>
-      <name>CIB seven EE Snapshots repository</name>      
-      <url>https://artifacts.cibseven.org/repository/enterprise-snapshots</url>
+      <id>mvn-cibseven-enterprise</id>
+      <name>CIB seven EE repository</name>
+      <url>https://artifacts.cibseven.org/repository/enterprise-group/</url>
     </repository>
   </repositories>
   

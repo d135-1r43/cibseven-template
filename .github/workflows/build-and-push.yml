@@ -29,7 +29,7 @@ jobs:
           <settings>
             <servers>
               <server>
-                <id>mvn-cibseven-enterprise-snapshots</id>
+                <id>mvn-cibseven-enterprise</id>
                 <username>${{ secrets.CIBSEVEN_USERNAME }}</username>
                 <password>${{ secrets.CIBSEVEN_PASSWORD }}</password>
               </server>
