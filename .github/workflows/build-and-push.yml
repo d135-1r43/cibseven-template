@@ -29,25 +29,11 @@ jobs:
           <settings>
             <servers>
               <server>
-                <id>mvn-cibseven-enterprise</id>
+                <id>mvn-cibseven-enterprise-snapshots</id>
                 <username>${{ secrets.CIBSEVEN_USERNAME }}</username>
                 <password>${{ secrets.CIBSEVEN_PASSWORD }}</password>
               </server>
             </servers>
-            <profiles>
-              <profile>
-                <id>cibseven-ee</id>
-                <repositories>
-                  <repository>
-                    <id>mvn-cibseven-enterprise</id>
-                    <url>https://artifacts.cibseven.org/repository/enterprise-group/</url>
-                  </repository>
-                </repositories>
-              </profile>
-            </profiles>
-            <activeProfiles>
-              <activeProfile>cibseven-ee</activeProfile>
-            </activeProfiles>
           </settings>
           EOF
 
