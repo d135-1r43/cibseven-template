@@ -57,21 +57,46 @@ Admin-Zugang: `admin` / `admin`
 
 ### 2. Anwendung bauen und starten
 
+Zwei Varianten:
+
+**Variante A – Lokal mit Maven (für Entwicklung):**
+
+Keycloak via Docker, Anwendung lokal über Maven starten.
+
 ```bash
+docker compose up -d keycloak
 mvn clean package -DskipTests
 mvn spring-boot:run
 ```
 
-Die Anwendung ist unter `http://localhost:8080` erreichbar.
+**Variante B – Komplett über Docker Compose:**
 
-### Einloggen
+Keycloak und Anwendung gemeinsam starten. Beim ersten Lauf wird das JAR gebaut und ein Image erstellt.
 
-Nach dem Öffnen von `http://localhost:8080` wird automatisch zu Keycloak weitergeleitet. Login mit:
+```bash
+mvn clean package -DskipTests
+docker compose up --build
+```
+
+### Einloggen und Web-UIs öffnen
+
+Nach dem Öffnen einer der unten genannten URLs wird automatisch zu Keycloak weitergeleitet. Login mit:
 
 - **Benutzername:** `demo`
 - **Passwort:** `demo`
 
-Der Benutzer `demo` ist Mitglied der Gruppe `camunda-admin` und hat vollen Zugriff auf die Anwendung.
+Der Benutzer `demo` ist Mitglied der Gruppe `camunda-admin` und hat vollen Zugriff.
+
+CIB seven liefert vier Webapps, die alle vom Spring-Boot-Prozess auf Port 8080 ausgeliefert werden:
+
+| App      | URL (neuer Webclient)                       | URL (Legacy)                                |
+|----------|---------------------------------------------|---------------------------------------------|
+| Welcome  | <http://localhost:8080/webapp/app/welcome>  | <http://localhost:8080/camunda/app/welcome> |
+| Cockpit  | <http://localhost:8080/webapp/app/cockpit>  | <http://localhost:8080/camunda/app/cockpit> |
+| Tasklist | <http://localhost:8080/webapp/app/tasklist> | <http://localhost:8080/camunda/app/tasklist> |
+| Admin    | <http://localhost:8080/webapp/app/admin>    | <http://localhost:8080/camunda/app/admin>   |
+
+Die Engine-REST-API ist unter <http://localhost:8080/engine-rest> erreichbar.
 
 ## Benutzer und Rollen
 

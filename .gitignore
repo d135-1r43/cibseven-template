@@ -20,3 +20,6 @@ hs_err_pid*
 .classpath
 .settings
 .project
+
+# Local Maven settings with CIB seven EE credentials (template at .mvn-settings.xml)
+.mvn-settings.xml

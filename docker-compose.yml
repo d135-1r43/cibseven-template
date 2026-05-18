@@ -5,9 +5,38 @@ services:
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      # Force a single canonical front-channel URL so tokens always carry
+      # iss=http://localhost:8180/realms/cib-seven, no matter whether the request
+      # came from the host browser or from the app container.
+      KC_HOSTNAME: http://localhost:8180
       KC_HOSTNAME_STRICT: "false"
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: "true"
       KC_HTTP_ENABLED: "true"
+      KC_HEALTH_ENABLED: "true"
     ports:
       - "8180:8080"
     volumes:
       - ./keycloak:/opt/keycloak/data/import
+    healthcheck:
+      test:
+        - "CMD-SHELL"
+        - "exec 3<>/dev/tcp/127.0.0.1/9000 && printf 'GET /health/ready HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3 && cat <&3 | grep -q '\"status\": \"UP\"'"
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  app:
+    build: .
+    image: cibseven-spring-boot-oidc:local
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    environment:
+      # Browser-facing Keycloak URL (used for redirects and JWT iss validation).
+      KEYCLOAK_BROWSER_URL: http://localhost:8180
+      # Server-side Keycloak URL (used for token exchange, JWK fetch, admin REST).
+      KEYCLOAK_SERVER_URL: http://keycloak:8080
+    ports:
+      - "8080:8080"
+    restart: on-failure
